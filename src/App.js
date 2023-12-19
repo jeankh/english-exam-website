@@ -2,7 +2,10 @@ import React, { useState } from "react";
 // import { Route, Routes } from "react-router-dom";
 import "./reset.css";
 import "./App.css";
-import { pages } from "./data/data";
+import { players } from "./data/data";
+import Headers from "./components/Header";
+import PlayerList from "./components/PlayerList";
+import PlayerDetails from "./components/PlayerDetails";
 
 function App() {
   const getPreferredTheme = () => {
@@ -15,32 +18,33 @@ function App() {
   const initialTheme = localStorage.getItem("theme") || getPreferredTheme();
   const [theme, setTheme] = useState(initialTheme);
 
-  // const toggleTheme = () => {
-  //   const newTheme = theme === "light" ? "dark" : "light";
-  //   setTheme(newTheme);
-  //   localStorage.setItem("theme", newTheme);
-  // };
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+
+  const handleClick = (player) => {
+    setSelectedPlayer(player);
+  };
+  const handleBack = () => {
+    setSelectedPlayer(null);
+  };
 
   return (
     <div className={`App ${theme}`}>
-      <h1>Hello !</h1>
-      {/* <Header theme={theme} onChangeTheme={toggleTheme} pages={pages} /> */}
-      {/* <Routes> */}
-      {/* <Route
-          path="/"
-          element={
-            <Home theme={theme} aboutMeData={aboutMeData} projects={projects} />
-          }
+      <Headers theme={theme} onChangeTheme={toggleTheme} />
+      {selectedPlayer ? (
+        <PlayerDetails
+          theme={theme}
+          player={selectedPlayer}
+          handleBackClick={handleBack}
         />
-        <Route
-          path="/about-me"
-          element={<AboutMe theme={theme} aboutMeData={aboutMeData} />}
-        />
-        <Route
-          path="/my-projects"
-          element={<Projects theme={theme} projects={projects} />}
-        /> */}
-      {/* </Routes> */}
+      ) : (
+        <PlayerList theme={theme} players={players} handleClick={handleClick} />
+      )}
     </div>
   );
 }

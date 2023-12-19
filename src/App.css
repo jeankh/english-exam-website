@@ -10,7 +10,7 @@ html,
 }
 
 body {
-  background-color: #eceff3;
+  background-color: var(--background-color1);
   position: relative;
   font-family: "Rubik", sans-serif;
   margin: 0;
@@ -20,11 +20,22 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
+  background-color: var(--background-color1);
 }
 .App.light {
-  background-color: #eceff3;
+  --background-color1: #eceff3;
+  --background-color: #ffffff;
+  ---color: black;
+  --font-color: #e7ba25;
+  --shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
 .App.dark {
-  background-color: #161616;
+  --background-color1: #161616;
+  --background-color: #202020;
+  ---color: white;
+  --font-color: #823ddf;
+  --shadow: rgba(255, 255, 255, 0.1) 0px 4px 16px,
+    rgba(255, 255, 255, 0.05) 0px 8px 32px;
 }
